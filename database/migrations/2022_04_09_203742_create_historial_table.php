@@ -22,7 +22,7 @@ return new class extends Migration
             $table->double('temperatura');
             $table->integer('cc');
             $table->unsignedBigInteger('paciente_id');
-            $table->unsignedBigInteger('veterinario_id');
+            $table->unsignedBigInteger('user_id');
             $table->foreign('paciente_id')->references('id')->on('pacientes');
             $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();
