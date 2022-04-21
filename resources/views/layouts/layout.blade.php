@@ -10,22 +10,22 @@
     @yield('title')
 
     <!-- STYLES -->
-    <link href="{{ asset('css/styles.css') }}" rel="stylesheet">
+    <link href="{{ secure_asset('css/styles.css') }}" rel="stylesheet">
 
     <!-- FAVICON -->
-    <link rel="icon" type="image/jpg" href="{{asset('img/favicon.ico')}}" />
+    <link rel="icon" type="image/jpg" href="{{secure_asset('img/favicon.ico')}}" />
     
     <!-- SCRIPTS -->
     <script src="https://kit.fontawesome.com/d51903633f.js" crossorigin="anonymous"></script>
-    <script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
-    <script src="{{ asset('js/scripts.js') }}"></script>
+    <script src="{{ secure_asset('js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ secure_asset('js/scripts.js') }}"></script>
 
 </head>
 <body class="sb-nav-fixed" style="background-color: rgb(66, 19, 101) ">
     <nav class="sb-topnav navbar navbar-expand navbar-light" style="background-color: #e0e0e0;">
         <!-- Navbar Brand-->
         <a class="navbar-brand ps-3" href="{{route('home')}}">
-            <img src="{{ asset('img/Logo.png') }}" alt="" width="50" height="40" class="ms-4 d-lg-none">
+            <img src="{{ secure_asset('img/Logo.png') }}" alt="" width="50" height="40" class="ms-4 d-lg-none">
         </a>
         <!-- Sidebar Toggle-->
         <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
@@ -56,7 +56,7 @@
         <div id="layoutSidenav_nav">
             <nav class="sb-sidenav accordion sb-sidenav-custom" id="sidenavAccordion">
                 <a href="{{route('home')}}">
-                    <img src="{{ asset('img/Logo.png') }}" alt="" width="100" height="80" class="ms-5 d-none d-lg-block">
+                    <img src="{{ secure_asset('img/Logo.png') }}" alt="" width="100" height="80" class="ms-5 d-none d-lg-block">
                 </a>
                 <div class="sb-sidenav-menu">
                     <div class="nav">
