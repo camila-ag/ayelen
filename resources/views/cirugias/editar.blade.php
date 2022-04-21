@@ -70,7 +70,7 @@
             </div>
 
             @if ($message = Session::get('error'))
-                <div class="col-md-12 mt-2">
+                <div class="col-md-12 mt-3">
                     <div class="alert alert-warning d-flex align-items-center alert-dismissible fade show" role="alert">
                         <svg class="bi flex-shrink-0 me-3" width="24" height="24" role="img" aria-label="Warning:"><use xlink:href="#exclamation-triangle-fill" /></svg>
                         <div>

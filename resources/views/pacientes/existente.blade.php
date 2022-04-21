@@ -33,37 +33,36 @@
     @if ($prop = Session::get('prop'))
         <form action="{{route('store.existente')}}" method="POST" class="row">
             @csrf
-            @foreach ($prop as $p)
-                <div class="justify-content-evenly row">
-                    <div class="col-md-5">
-                        <dl class="row">
-                            <dt class="col-3 fw-normal">Nombre</dt>
-                            <dd class="col-9">{{$p->nombre}}</dd>
-                        </dl>
-                    </div>
-                    <div class="col-md-5">
-                        <dl class="row">
-                            <dt class="col-3 fw-normal">Rut</dt>
-                            <dd class="col-9">{{$p->rut}}</dd>
-                        </dl>
-                    </div>
-                    <div class="col-md-5">
-                        <dl class="row">
-                            <dt class="col-3 fw-normal">Teléfono</dt>
-                            <dd class="col-9">+56 9 {{$p->telefono}}</dd>
-                        </dl>
-                    </div>
-                    <div class="col-md-5">
-                        <dl class="row">
-                            <dt class="col-3 fw-normal">Dirección</dt>
-                            <dd class="col-9">{{$p->direccion}}</dd>
-                        </dl>
-                    </div>
+            
+            <div class="justify-content-evenly row">
+                <div class="col-md-5">
+                    <dl class="row">
+                        <dt class="col-3 fw-normal">Nombre</dt>
+                        <dd class="col-9">{{$prop->nombre}}</dd>
+                    </dl>
+                </div>
+                <div class="col-md-5">
+                    <dl class="row">
+                        <dt class="col-3 fw-normal">Rut</dt>
+                        <dd class="col-9">{{$prop->rut}}</dd>
+                    </dl>
+                </div>
+                <div class="col-md-5">
+                    <dl class="row">
+                        <dt class="col-3 fw-normal">Teléfono</dt>
+                        <dd class="col-9">+56 9 {{$prop->telefono}}</dd>
+                    </dl>
+                </div>
+                <div class="col-md-5">
+                    <dl class="row">
+                        <dt class="col-3 fw-normal">Dirección</dt>
+                        <dd class="col-9">{{$prop->direccion}}</dd>
+                    </dl>
                 </div>
 
-                <input type="hidden" name="propietario_rut" value="{{$p->rut}}">
+                <input type="hidden" name="propietario_rut" value="{{$prop->rut}}">
 
-            @endforeach
+            </div>     
 
             <div class="row justify-content-evenly">
                 <h4 class="py-3 border-bottom border-top my-4 border-dark">Datos paciente</h4>
@@ -71,10 +70,10 @@
                     <div class="mb-3 row">
                         <label for="pac" class="col-sm-3 col-form-label">Nombre</label>
                         <div class="col-sm-8">
-                            <input type="text" class="form-control @error('nombrepac') is-invalid @enderror" value="{{ old('nombrepac') }}" name="nombre" id="nombrepac"
+                            <input type="text" class="form-control @error('nombre') is-invalid @enderror" value="{{ old('nombre') }}" name="nombre" id="nombre"
                             placeholder="Ingrese nombre" required>
-                            @error('nombrepac')
-                                <div id="nombrepac" class="invalid-feedback">{{$message}}</div>
+                            @error('nombre')
+                                <div id="nombre" class="invalid-feedback">{{$message}}</div>
                             @enderror
                         </div>
                     </div>

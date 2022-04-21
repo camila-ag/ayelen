@@ -33,7 +33,7 @@ class ConsultaController extends Controller
             'motivo' => 'required',
             'paciente' => 'required',
             'propietario' => 'required',
-            'telefono' => ['required','numeric','min:8','max:8'],
+            'telefono' => ['required','numeric','digits:8'],
         ]);
 
         $fecha = $request['fecha'];
@@ -52,7 +52,7 @@ class ConsultaController extends Controller
         
         if ($isthere == 1) {
             return redirect()->route('consultas.create')
-            ->with('error', 'La cita del dia '.date("d/m/Y", strtotime($fecha)).' a las '.$hora.' hrs no se encuentra disponible.');
+            ->with('error', 'La cita del dia '.date("d/m/Y", strtotime($fecha)).' a las '.$hora.' hrs no se encuentra disponible.')->withInput();
         } else {
             Consulta::create($request->all());
             return redirect()->route('consultas.index')->with('success', 'Consulta ingresada correctamente.');
@@ -88,7 +88,7 @@ class ConsultaController extends Controller
             'motivo' => 'required',
             'paciente' => 'required',
             'propietario' => 'required',
-            'telefono' => 'required',
+            'telefono' => ['required','numeric','digits:8'],
         ]);
 
         $fecha = $request['fecha'];
@@ -100,8 +100,11 @@ class ConsultaController extends Controller
         $isthere = 0;
         foreach ($consultas as $c) {
             if($c->hora == $hora){
-                $isthere = 1;
-                print($c->hora.' | '.$hora.' | '.$isthere.'<br>');
+                if($c->id == $consulta->id){
+                    $isthere = 0;
+                }else{
+                    $isthere = 1;
+                }
             }
         }
 

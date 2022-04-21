@@ -8,6 +8,7 @@ use App\Models\Propietario;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Validator;
 use Malahierba\ChileRut\ChileRut;
 use Malahierba\ChileRut\Rules\ValidChileanRut;
 
@@ -146,7 +147,7 @@ class PacienteController extends Controller
             'rut' => ['required','string','min:10','max:10', new ValidChileanRut(new ChileRut)],
         ]);
 
-        $propietario = Propietario::where('rut',$request->rut)->get();
+        $propietario = Propietario::where('rut',$request->rut)->first();
 
         return redirect()->route('pacientes.existente')->with('prop',$propietario);
     }
@@ -154,7 +155,7 @@ class PacienteController extends Controller
     //Guardar el paciente del propietario existente
     public function storeExistente(Request $request)
     {
-        $request->validate([
+        $validador = Validator::make($request->all(),[
             'nombre' => 'required',
             'nacimiento' => 'required',
             'especie' => 'required',
@@ -164,10 +165,17 @@ class PacienteController extends Controller
             'propietario_rut' => 'required'
         ]);
 
-        Paciente::create($request->all());
+        $rut = $request['propietario_rut'];
+        $propietario = Propietario::where('rut',$rut)->first();
 
-        $id = Paciente::latest('id')->select('id')->first();
-        return redirect()->route('pacientes.show',$id);
+        if($validador->fails()){
+            return redirect()->route('pacientes.existente')->with('prop',$propietario)->withErrors($validador)->withInput();
+        }else{
+            Paciente::create($request->all());
+            $id = Paciente::latest('id')->select('id')->first();
+            return redirect()->route('pacientes.show',$id);
+        }
+
     }
 
     //revisar un paciente
@@ -179,7 +187,7 @@ class PacienteController extends Controller
         ->orderBy('fecha','desc')
         ->get();
 
-        $propietario = Propietario::where('rut',$paciente->propietario_rut)->get();
+        $propietario = Propietario::where('rut',$paciente->propietario_rut)->first();
 
         return view('pacientes.revisar',compact('paciente','historial','propietario'));
     }

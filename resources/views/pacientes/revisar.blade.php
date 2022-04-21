@@ -11,19 +11,19 @@
         <div class="border border-dark py-2 px-3 shadow rounded bg-light">
             <h4 class="border-bottom pb-2 border-dark">Datos propietario</h4>
             <dl class="row">
-                @foreach ($propietario as $prop)
+                
                 <dt class="col-3">Nombre</dt>
-                <dd class="col-9">{{ucwords($prop->nombre)}}</dd>
+                <dd class="col-9">{{ucwords($propietario->nombre)}}</dd>
 
                 <dt class="col-3">Rut</dt>
-                <dd class="col-9">{{$prop->rut}}</dd>
+                <dd class="col-9">{{$propietario->rut}}</dd>
 
                 <dt class="col-3">Teléfono</dt>
-                <dd class="col-9">+56 9 {{$prop->telefono}}</dd>
+                <dd class="col-9">+56 9 {{$propietario->telefono}}</dd>
 
                 <dt class="col-sm-3">Dirección</dt>
-                <dd class="col-sm-9">{{ucwords($prop->direccion)}}</dd>
-                @endforeach
+                <dd class="col-sm-9">{{ucwords($propietario->direccion)}}</dd>
+                
                 
             </dl>
             <h4 class="border-bottom border-top py-2 border-dark">Datos paciente</h4>

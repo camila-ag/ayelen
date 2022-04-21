@@ -33,7 +33,7 @@ class CirugiaController extends Controller
             'paciente' => 'required',
             'especie' => 'required',
             'propietario' => 'required',
-            'telefono' =>  ['required','numeric','min:8','max:8'],
+            'telefono' =>  ['required','numeric','digits:8'],
         ]);
 
         Cirugia::create($request->all());
@@ -53,7 +53,7 @@ class CirugiaController extends Controller
             'paciente' => 'required',
             'especie' => 'required',
             'propietario' => 'required',
-            'telefono' => 'required',
+            'telefono' => ['required','numeric','digits:8'],
         ]);
 
         $cirugia->update($request->all());
