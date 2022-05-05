@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cirugia;
+use App\Models\Notification;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
@@ -16,8 +17,18 @@ class CirugiaController extends Controller
     public function index()
     {
         $hoy = Carbon::today();
+        $noti = Notification::whereDate('created_at',$hoy)->where('name','cirugia')->get();
         $cirugias = Cirugia::whereDate('fecha','>=',$hoy)->orderBy('fecha')->get();
-        return view('cirugias.index', compact('cirugias'));
+
+        $count = $noti->count();
+
+        if($count == 0){
+            $bell = 0;
+            return view('cirugias.index', compact('cirugias', 'bell'));
+        }else{
+            $bell = 1;
+            return view('cirugias.index', compact('cirugias', 'bell'));
+        }
     }
 
     public function create()

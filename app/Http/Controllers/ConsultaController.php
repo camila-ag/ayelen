@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Consulta;
+use App\Models\Notification;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
@@ -16,8 +17,18 @@ class ConsultaController extends Controller
     public function index()
     {
         $hoy = Carbon::today();
+        $noti = Notification::whereDate('created_at',$hoy)->where('name','consulta')->get();
         $consultas = Consulta::whereDate('fecha','>=',$hoy)->orderBy('fecha')->orderBy('hora')->get();
-        return view('consultas.index', compact('consultas'));
+
+        $count = $noti->count();
+
+        if($count == 0){
+            $bell = 0;
+            return view('consultas.index', compact('consultas', 'bell'));
+        }else{
+            $bell = 1;
+            return view('consultas.index', compact('consultas', 'bell'));
+        }
     }
 
     public function create()

@@ -12,7 +12,8 @@
         "laravel/tinker": "^2.7",
         "laravel/ui": "^3.4",
         "laraveles/spanish": "^1.5",
-        "malahierba-lab/chile-rut": "5.1.*"
+        "malahierba-lab/chile-rut": "5.1.*",
+        "twilio/sdk": "^6.37"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",

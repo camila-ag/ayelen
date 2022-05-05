@@ -4,6 +4,7 @@ use App\Http\Controllers\CirugiaController;
 use App\Http\Controllers\ConsultaController;
 use App\Http\Controllers\HistorialController;
 use App\Http\Controllers\PacienteController;
+use App\Http\Controllers\SMSController;
 use App\Models\Historial;
 use App\Models\Paciente;
 use Illuminate\Support\Facades\Auth;
@@ -55,3 +56,7 @@ Route::post('consultas/filtrar', [ConsultaController::class, 'filtrar'])->name('
 Route::resource('cirugias', CirugiaController::class);
 
 Route::post('cirugias/filtrar', [CirugiaController::class, 'filtrar'])->name('cirugias.filtrar');
+
+Route::post('sms', [SMSController::class, 'notiConsultas'])->name('sms');
+
+Route::post('notificar', [SMSController::class, 'notiCirugias'])->name('notificar');

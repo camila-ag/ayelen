@@ -14,10 +14,10 @@
         <div class="mb-3 row">
             <label for="rut" class="col-sm-2 col-form-label">Buscar propietario</label>
             <div class="col-sm-5">
-                <input class="form-control @error('rut') is-invalid @enderror" list="datalistOptions" id="rut" name="rut" placeholder="Rut sin puntos y con guión" autocomplete="off">
+                <input class="form-control @error('rut') is-invalid @enderror" list="datalistOptions" id="rut" name="rut" placeholder="Ingrese nombre o rut" autocomplete="off">
                 <datalist id="datalistOptions">
                     @foreach ($propietarios as $p)
-                        <option value="{{$p->rut}}">{{$p->rut}}</option>
+                        <option value="{{$p->rut}}">{{$p->rut}} {{$p->nombre}}</option>
                     @endforeach
                 </datalist>
                 @error('rut')

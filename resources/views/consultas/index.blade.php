@@ -6,7 +6,24 @@
 
 @section('content')
 <div class="bg-light text-dark p-3 my-4 border border-dark rounded mx-auto" style="max-width:1300px;">
-    <h4 class="pb-3 border-bottom mb-4 border-dark">Consultas</h4>
+    <div class="row border-bottom border-dark py-2 mb-3">
+        <div class="col-md-6">
+            <h4 class="">Consultas</h4>
+        </div>
+        <div class="col-md-6 text-md-end">
+            @if ($bell == 0)
+                <form action="{{route('sms')}}" method="POST">
+                    @csrf
+                    <button class="btn btn-primary"><i class="fa-solid fa-bell me-2"></i>Enviar recordatorios</button>
+                </form>
+            @else
+                <form action="{{route('sms')}}" method="POST">
+                    @csrf
+                    <button class="btn btn-primary" disabled><i class="fa-solid fa-bell me-2"></i>Enviar recordatorios</button>
+                </form>
+            @endif
+        </div>
+    </div>
 
     @if ($message = Session::get('error'))
         <div class="col-md-12">
