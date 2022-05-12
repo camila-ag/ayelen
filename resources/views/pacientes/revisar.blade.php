@@ -61,9 +61,9 @@
         </ul>
 
         <div id="myTabContent" class="tab-content">
-            <div class="tab-pane fade active show bg-light  rounded-bottom shadow" id="historial">
+            <div class="tab-pane fade active show bg-light p-2 rounded-bottom shadow" id="historial">
                 <div class="row d-flex justify-content-center text-center mx-auto">
-                    <div class="mt-3 text-end">
+                    <div class="text-end">
                         <a href="{{route('historial.registrar', $paciente->id)}}" class="btn btn-primary">
                             <i class="fa-solid fa-pencil pe-2"></i>
                             Registrar consulta
