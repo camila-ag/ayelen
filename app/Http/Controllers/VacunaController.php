@@ -1,0 +1,85 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\Paciente;
+use App\Models\Vacuna;
+use Carbon\Carbon;
+use Illuminate\Http\Request;
+use App\Models\Notification;
+use App\Models\Propietario;
+use Twilio\Rest\Client;
+
+class VacunaController extends Controller
+{
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
+    public function nuevaVacuna(Paciente $paciente)
+    {
+        return view('historial.vacuna', compact('paciente'));
+    }
+
+    public function store(Request $request)
+    {
+        $request->validate([
+            'vacuna' => 'required',
+            'marca' => 'required',
+            'fecha_adm' => 'required',
+            'fecha_prox' => 'required',
+            'paciente_id' => 'required',
+            'user_id' => 'required',
+        ]);
+
+        Vacuna::create($request->all());
+        
+        return redirect()->route('pacientes.show',$request['paciente_id']);
+
+    }
+
+
+    public function enviarAvisos()
+    {
+        $fecha = Carbon::now()->addDays(2);
+        $fecha->locale();
+        
+        $twilio = new Client(config('services.twilio.sid'), config('services.twilio.token'));
+
+        $vacunas = Vacuna::join('pacientes','vacunas.paciente_id','=','pacientes.id')
+        ->join('propietarios','pacientes.propietario_rut','=','propietarios.rut')
+        ->select('vacunas.fecha_prox','pacientes.nombre as paciente','propietarios.telefono')
+        ->whereDate('vacunas.fecha_prox',$fecha)
+        ->get();
+
+        $c = $vacunas->count();
+
+        if($c > 0){
+            foreach($vacunas as $v){
+                $to = "+569".$v->telefono;
+                //print($to);
+                $twilio->messages 
+                      ->create($to, // to 
+                               array(  
+                                   "from" => "MG0da3b45bb8e42ca1df2dfae292e0e90c",      
+                                   "body" => "Veterinaria Ayelen te recuerda que se acerca la próxima vacuna de {$v->paciente} el día {$fecha->dayName} {$fecha->day} de {$fecha->monthName}, recuerda agendar una hora al número +56912345678." 
+                               ) 
+                      ); 
+            }
+    
+            Notification::create(
+                ['name' => 'vacuna']
+            );
+    
+            return redirect()->route('pacientes.index')
+                ->with('success', 'Recordatorios enviados correctamente.');
+        
+        }else{
+            return redirect()->route('pacientes.index')
+                ->with('error', 'No hay vacunas próximas.');
+        }
+        
+    }
+
+}

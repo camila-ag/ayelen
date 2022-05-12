@@ -5,6 +5,7 @@ use App\Http\Controllers\ConsultaController;
 use App\Http\Controllers\HistorialController;
 use App\Http\Controllers\PacienteController;
 use App\Http\Controllers\SMSController;
+use App\Http\Controllers\VacunaController;
 use App\Models\Historial;
 use App\Models\Paciente;
 use Illuminate\Support\Facades\Auth;
@@ -45,8 +46,11 @@ Route::post('store.existente', [PacienteController::class, 'storeExistente'])->n
 
 Route::resource('historial', HistorialController::class);
 
+Route::resource('vacuna', VacunaController::class);
+
 Route::get('registrar/{paciente}', [HistorialController::class, 'viewRegistrar'])->name('historial.registrar');
 
+Route::get('vac/{paciente}', [VacunaController::class, 'nuevaVacuna'])->name('vacuna.registrar');
 
 Route::resource('consultas', ConsultaController::class);
 
@@ -60,3 +64,5 @@ Route::post('cirugias/filtrar', [CirugiaController::class, 'filtrar'])->name('ci
 Route::post('sms', [SMSController::class, 'notiConsultas'])->name('sms');
 
 Route::post('notificar', [SMSController::class, 'notiCirugias'])->name('notificar');
+
+Route::post('avisar', [VacunaController::class, 'enviarAvisos'])->name('avisar');

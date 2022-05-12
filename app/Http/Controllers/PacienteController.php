@@ -3,9 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Historial;
+use App\Models\Notification;
 use App\Models\Paciente;
 use App\Models\Propietario;
 use App\Models\User;
+use App\Models\Vacuna;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Validator;
@@ -22,8 +25,20 @@ class PacienteController extends Controller
     //Listado de pacientes
     public function index()
     {
+        $hoy = Carbon::today();
+        $noti = Notification::whereDate('created_at',$hoy)->where('name','vacuna')->get();
         $propietarios = Propietario::with('pacientes')->get();
-        return view('pacientes.index',compact('propietarios'));
+
+        $count = $noti->count();
+
+        if($count == 0){
+            $bell = 0;
+            return view('pacientes.index',compact('propietarios','bell'));
+        }else{
+            $bell = 1;
+            return view('pacientes.index',compact('propietarios','bell'));
+        }
+        
     }
 
     //Buscar por nombre del paciente
@@ -181,14 +196,16 @@ class PacienteController extends Controller
     //revisar un paciente
     public function show(Paciente $paciente)
     {
-        //$historial = Historial::where('paciente_id',$paciente->id)->get();
-
         $historial = Historial::join('users','historial.user_id','=','users.id')->where('historial.paciente_id',$paciente->id)
         ->orderBy('fecha','desc')
         ->get();
 
+        $vacunas = Vacuna::join('users','vacunas.user_id','=','users.id')->where('vacunas.paciente_id',$paciente->id)
+        ->orderBy('fecha_adm','desc')
+        ->get();
+
         $propietario = Propietario::where('rut',$paciente->propietario_rut)->first();
 
-        return view('pacientes.revisar',compact('paciente','historial','propietario'));
+        return view('pacientes.revisar',compact('paciente','historial','propietario','vacunas'));
     }
 }

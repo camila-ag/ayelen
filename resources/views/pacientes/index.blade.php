@@ -6,9 +6,29 @@
 
 @section('content')
     <div class="bg-light text-dark px-3 my-4 border border-dark rounded mx-auto" style="max-width:1100px;">
-        <h3 class="mt-3 border-bottom border-dark pb-2">Pacientes registrados</h3>
+        <div class="row mt-3 border-bottom border-dark pb-2">
+            <div class="col-md-6">
+                <h3 class="">Pacientes registrados</h3>
+            </div>
+            <div class="col-md-6 text-md-end">
+                @if ($bell == 0)
+                    <form action="{{route('avisar')}}" method="POST">
+                        @csrf
+                        <button class="btn btn-primary"><i class="fa-solid fa-bell me-2"></i>Enviar avisos de vacunas</button>
+                    </form>
+                @else
+                    <form action="{{route('avisar')}}" method="POST">
+                        @csrf
+                        <span class="d-inline-block" tabindex="0" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Hoy ya se enviaron avisos">
+                            <button class="btn btn-primary" type="button" disabled><i class="fa-solid fa-bell me-2"></i>Enviar avisos de vacunas</button>
+                        </span>
+                    </form>
+                @endif 
+                   
+            </div>
+        </div>
 
-        <h5 class=" mb-3">Nuevo paciente</h5>
+        <h5 class="my-3">Nuevo paciente</h5>
 
         <div class="row mb-3">
             <div class="col-lg-3 mb-3 mt-lg-0">

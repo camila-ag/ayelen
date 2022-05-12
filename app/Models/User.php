@@ -47,4 +47,9 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Models\Historial','user_id','id');
     }
+
+    public function vacuna()
+    {
+        return $this->hasMany('App\Models\Vacuna','user_id','id');
+    }
 }

@@ -29,4 +29,9 @@ class Paciente extends Model
         return $this->hasMany('App\Models\Historial', 'paciente_id', 'id');
     }
 
+    public function vacuna()
+    {
+        return $this->hasMany('App\Models\Vacuna', 'paciente_id', 'id');
+    }
+
 }
