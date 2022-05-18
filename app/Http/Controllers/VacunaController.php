@@ -42,7 +42,7 @@ class VacunaController extends Controller
 
     public function enviarAvisos()
     {
-        $fecha = Carbon::now()->addDays(2);
+        $fecha = Carbon::now()->addDay();
         $fecha->locale();
         
         $twilio = new Client(config('services.twilio.sid'), config('services.twilio.token'));

@@ -14,7 +14,7 @@
             @if ($bell == 0)
                 <form action="{{route('sms')}}" method="POST">
                     @csrf
-                    <button class="btn btn-primary"><i class="fa-solid fa-bell me-2"></i>Enviar recordatorios</button>
+                    <button class="btn btn-primary" disabled hidden><i class="fa-solid fa-bell me-2"></i>Enviar recordatorios</button>
                 </form>
             @else
                 <form action="{{route('sms')}}" method="POST">
