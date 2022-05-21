@@ -18,10 +18,9 @@ class DatabaseSeeder extends Seeder
     {
         // \App\Models\User::factory(10)->create();
         $user = new User();
-        $user->rut = '1-1';
-        $user->name = 'test';
-        $user->email = 'cami.27.1997@gmail.com';
-        $user->password = Hash::make('123');
+        $user->rut = '19894575-7';
+        $user->name = 'Administrador';
+        $user->password = Hash::make('cacahuate12');
         $user->save();
     }
 }

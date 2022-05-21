@@ -126,6 +126,7 @@
                                 <th scope="col">Fecha administración</th>
                                 <th scope="col">Vacuna</th>
                                 <th scope="col">Próxima dosis</th>
+                                <th scope="col">Administrada por</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -134,6 +135,7 @@
                                     <td>{{date("d/m/Y", strtotime($v->fecha_adm))}}</th>
                                     <td>{{$v->vacuna}}, {{$v->marca}}</td>
                                     <td>{{date("d/m/Y", strtotime($v->fecha_prox))}}</td>
+                                    <td>{{$v->name}}</td>
                                 </tr>
                             @endforeach
                             

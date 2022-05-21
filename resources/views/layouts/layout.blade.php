@@ -60,6 +60,12 @@
                 </a>
                 <div class="sb-sidenav-menu">
                     <div class="nav">
+                        <div class="sb-sidenav-menu-heading"></div>
+                        <a class="nav-link" href="{{ route('home') }}">
+                            <div class="sb-nav-link-icon"><i class="fa-solid fa-house"></i></div>
+                            Inicio
+                        </a>
+
                         <div class="sb-sidenav-menu-heading">Pacientes</div>
 
                         <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">

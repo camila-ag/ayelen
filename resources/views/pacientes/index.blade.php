@@ -14,13 +14,13 @@
                 @if ($bell == 0)
                     <form action="{{route('avisar')}}" method="POST">
                         @csrf
-                        <button class="btn btn-primary"><i class="fa-solid fa-bell me-2"></i>Enviar avisos de vacunas</button>
+                        <button class="btn btn-primary"><i class="fa-solid fa-bell me-2"></i>Enviar recordatorios de vacunas</button>
                     </form>
                 @else
                     <form action="{{route('avisar')}}" method="POST">
                         @csrf
-                        <span class="d-inline-block" tabindex="0" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Hoy ya se enviaron avisos">
-                            <button class="btn btn-primary" type="button" disabled><i class="fa-solid fa-bell me-2"></i>Enviar avisos de vacunas</button>
+                        <span class="d-inline-block" tabindex="0" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Ya se enviaron recordatorios">
+                            <button class="btn btn-primary" type="button" disabled><i class="fa-solid fa-bell me-2"></i>Enviar recordatorios de vacunas</button>
                         </span>
                     </form>
                 @endif 

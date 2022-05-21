@@ -30,7 +30,7 @@ class SMSController extends Controller
                       ->create($to, // to 
                                array(  
                                    "from" => "MG0da3b45bb8e42ca1df2dfae292e0e90c",      
-                                   "body" => "Recuerda la consulta de {$c->paciente} el dia {$fecha->dayName} {$fecha->day} de {$fecha->monthName} a las {$hora} hrs. en Veterinaria Ayelen. Para cancelar o reagendar la cita comunicarse al +56912345678." 
+                                   "body" => "Recuerda la consulta de {$c->paciente} el dia {$fecha->dayName} {$fecha->day} de {$fecha->monthName} a las {$hora} hrs. en Veterinaria Ayelen. Para cancelar o reagendar la cita comunicarse al +56971326967." 
                                ) 
                       ); 
             }
@@ -68,7 +68,7 @@ class SMSController extends Controller
                       ->create($to, // to 
                                array(  
                                    "from" => "MG0da3b45bb8e42ca1df2dfae292e0e90c",      
-                                   "body" => "Recuerda la cita de {$c->paciente} el dia {$fecha->dayName} {$fecha->day} de {$fecha->monthName} en Veterinaria Ayelen. Para cancelar o reagendar la cita comunicarse al +56912345678." 
+                                   "body" => "Recuerda la cita de {$c->paciente} el dia {$fecha->dayName} {$fecha->day} de {$fecha->monthName} en Veterinaria Ayelen. Para cancelar o reagendar la cita comunicarse al +56971326967." 
                                ) 
                       ); 
             }

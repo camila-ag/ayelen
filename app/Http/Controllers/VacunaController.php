@@ -63,7 +63,7 @@ class VacunaController extends Controller
                       ->create($to, // to 
                                array(  
                                    "from" => "MG0da3b45bb8e42ca1df2dfae292e0e90c",      
-                                   "body" => "Veterinaria Ayelen te recuerda que se acerca la próxima vacuna de {$v->paciente} el día {$fecha->dayName} {$fecha->day} de {$fecha->monthName}, recuerda agendar una hora al número +56912345678." 
+                                   "body" => "Veterinaria Ayelen te recuerda que se acerca la próxima vacuna de {$v->paciente} el día {$fecha->dayName} {$fecha->day} de {$fecha->monthName}, recuerda agendar una hora al número +56971326967." 
                                ) 
                       ); 
             }
@@ -72,11 +72,11 @@ class VacunaController extends Controller
                 ['name' => 'vacuna']
             );
     
-            return redirect()->route('pacientes.index')
+            return redirect()->back()
                 ->with('success', 'Recordatorios enviados correctamente.');
         
         }else{
-            return redirect()->route('pacientes.index')
+            return redirect()->back()
                 ->with('error', 'No hay vacunas próximas.');
         }
         
