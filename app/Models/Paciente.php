@@ -9,6 +9,7 @@ class Paciente extends Model
 {
     use HasFactory;
     protected $fillable = [
+        'chip',
         'nombre',
         'especie',
         'raza',

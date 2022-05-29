@@ -128,7 +128,11 @@
                         @foreach ($propietario as $prop)
                             @foreach ($prop->pacientes as $paci)
                                 <tr>
-                                    <td>{{$paci->id}}</td>
+                                    @if ($paci->chip == null)
+                                        <td class="col-1">Sin chip</td>
+                                    @else
+                                        <td>{{$paci->chip}}</td>
+                                    @endif                                    
                                     <td>{{ucfirst($paci->nombre)}}</td>
                                     <td>{{ucwords($prop->nombre)}}</td>
                                     <td>{{$paci->propietario_rut}}</td>
@@ -147,7 +151,11 @@
                             @foreach ($prop as $prop)
                                 @foreach ($prop->pacientes as $p)
                                     <tr>
-                                        <td>{{$p->id}}</td>
+                                        @if ($p->chip == null)
+                                            <td class="col-1">Sin chip</td>
+                                        @else
+                                            <td>{{$p->chip}}</td>
+                                        @endif
                                         <td>{{ucfirst($p->nombre)}}</td>
                                         <td>{{$prop->nombre}} </td>
                                         <td>{{$p->propietario_rut}}</td>
@@ -165,7 +173,11 @@
                             @foreach ($propietarios as $pr)
                                 @foreach ($pr->pacientes as $pa)
                                     <tr>
-                                        <td>{{$pa->id}}</td>
+                                        @if ($pa->chip == null)
+                                            <td class="col-1">Sin chip</td>
+                                        @else
+                                            <td>{{$pa->chip}}</td>
+                                        @endif
                                         <td>{{ucfirst($pa->nombre)}}</td>
                                         <td>{{ucwords($pr->nombre)}}</td>
                                         <td>{{$pa->propietario_rut}}</td>

@@ -38,4 +38,22 @@ class HistorialController extends Controller
         return redirect()->route('pacientes.show',$request['paciente_id']);
 
     }
+
+    public function edit(Historial $historial){
+        $paciente = Paciente::where('id',$historial->paciente_id)->first();
+        return view('historial.edit', compact('historial','paciente'));
+    }
+
+    public function update(Request $request, Historial $historial){
+        $request->validate([
+            'motivo' => 'required',
+            'tratamiento' => 'required',
+            'fecha' => 'required',
+            'peso' => 'required',
+            'temperatura' => 'required',
+            'cc' => 'required'
+        ]);
+        $historial->update($request->all());
+        return redirect()->route('pacientes.show',$historial->paciente_id);
+    }
 }

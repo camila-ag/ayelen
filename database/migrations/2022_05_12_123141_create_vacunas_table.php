@@ -19,6 +19,7 @@ return new class extends Migration
             $table->date('fecha_prox');
             $table->string('vacuna');
             $table->string('marca');
+            $table->string('obs');
             $table->unsignedBigInteger('paciente_id');
             $table->unsignedBigInteger('user_id');
             $table->foreign('paciente_id')->references('id')->on('pacientes');

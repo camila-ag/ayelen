@@ -45,6 +45,15 @@
                     <div id="marca" class="invalid-feedback">{{$message}}</div>
                 @enderror
             </div>
+
+            <label for="obs" class="col-md-2 col-form-label">Observaciones</label>
+            <div class="col-md-4 mb-3">
+                <textarea name="obs" id="obs" class="form-control @error('obs') is-invalid @enderror"
+                placeholder="Ingrese observaciones">{{old('obs')}}</textarea>
+                @error('obs')
+                    <div id="obs" class="invalid-feedback">{{$message}}</div>
+                @enderror
+            </div>
     
             <label for="fecha_prox" class="col-md-2 col-form-label">Próxima dosis</label>
             <div class="col-md-4 mb-3">

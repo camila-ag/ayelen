@@ -27,6 +27,7 @@ class VacunaController extends Controller
         $request->validate([
             'vacuna' => 'required',
             'marca' => 'required',
+            'obs' => 'required',
             'fecha_adm' => 'required',
             'fecha_prox' => 'required',
             'paciente_id' => 'required',

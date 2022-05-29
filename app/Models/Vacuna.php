@@ -14,6 +14,7 @@ class Vacuna extends Model
         'fecha_prox',
         'vacuna',
         'marca',
+        'obs',
         'paciente_id',
         'user_id',
     ];

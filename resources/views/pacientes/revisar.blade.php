@@ -9,8 +9,16 @@
 <div class="row mt-4 justify-content-evenly">    
     <div class="col-md-4 mb-3">
         <div class="border border-dark py-2 px-3 shadow rounded bg-light">
-            <h4 class="border-bottom pb-2 border-dark">Datos propietario</h4>
-            <dl class="row">
+            <div class="row border-bottom border-dark">
+                <div class="col-8">
+                    <h4 class="">Datos propietario</h4>
+                </div>
+                <div class="col-4 text-end pt-1">
+                    
+                </div>
+            </div>
+            
+            <dl class="row pt-2">
                 
                 <dt class="col-3">Nombre</dt>
                 <dd class="col-9">{{ucwords($propietario->nombre)}}</dd>
@@ -26,9 +34,23 @@
                 
                 
             </dl>
-            <h4 class="border-bottom border-top py-2 border-dark">Datos paciente</h4>
+            <div class="row border-bottom border-top pt-2 pb-1 border-dark">
+                <div class="col-8">
+                    <h4 class="">Datos paciente</h4>
+                </div>
+                <div class="col-4 text-end pt-1">
+                    @if ($paciente->chip == null)
+                       <span>Sin microchip</span>
+                        <a href="{{route('pacientes.edit', $paciente->id)}}" class="text-decoration-none" style="color: rgba(66, 19, 101);">
+                            <i class="fa-solid fa-pen-to-square ms-2 fs-4"></i>
+                        </a>
+                    @else
+                        <span>#{{$paciente->chip}}</span>
+                    @endif
+                </div>
+            </div>
 
-            <dl class="row">
+            <dl class="row pt-2">
                 <dt class="col-4">Nombre</dt>
                 <dd class="col-8">{{ucfirst($paciente->nombre)}}</dd>
 
@@ -73,7 +95,13 @@
                     @foreach ($historial as $h)
                         <dl class="row border-bottom border-dark mt-2">
                             <dt class="col-sm-3 text-start text-md-end">{{date("d/m/Y", strtotime($h->fecha))}}</dt>
-                            <dd class="col-sm-9 fw-bold" style="text-align: justify;">{{$h->motivo}}</dd>
+                            <dd class="col-sm-9 fw-bold" style="text-align: justify;">
+                                {{$h->motivo}}
+                                <a href="{{route('historial.edit', $h->id)}}" class="text-decoration-none">
+                                    <i class="fa-solid fa-pen-to-square ms-3 fs-5"></i>
+                                    Editar
+                                </a>
+                            </dd>
                             <dd class="col-sm-3 d-none d-xl-block">
                                 <dl class="row">
                                     <dt class="col-7 text-end">T°:</dt>
@@ -101,7 +129,7 @@
                                         <p>{{$h->tratamiento}}</p>
                                     </blockquote>
                                     <figcaption class="blockquote-footer text-end text-dark fs-6">
-                                        Atendido por: {{$h->name}}
+                                        Atendido por: {{$h->veterinario}}
                                     </figcaption>
                                 </figure>
                             </dd>
@@ -123,8 +151,9 @@
                     <table class="table mt-3">
                         <thead>
                             <tr>
-                                <th scope="col">Fecha administración</th>
+                                <th scope="col">Administración</th>
                                 <th scope="col">Vacuna</th>
+                                <th scope="col">Observaciones</th>
                                 <th scope="col">Próxima dosis</th>
                                 <th scope="col">Administrada por</th>
                             </tr>
@@ -132,9 +161,15 @@
                         <tbody>
                             @foreach ($vacunas as $v)
                                 <tr class="border-bottom border-dark">
-                                    <td>{{date("d/m/Y", strtotime($v->fecha_adm))}}</th>
+                                    <td class="col-1">{{date("d/m/Y", strtotime($v->fecha_adm))}}</th>
                                     <td>{{$v->vacuna}}, {{$v->marca}}</td>
-                                    <td>{{date("d/m/Y", strtotime($v->fecha_prox))}}</td>
+                                    @if ($v->obs == null)
+                                        <td>Ninguna</td>
+                                    @else
+                                        <td>{{$v->obs}}</td>
+                                    @endif
+                                    
+                                    <td class="col-2">{{date("d/m/Y", strtotime($v->fecha_prox))}}</td>
                                     <td>{{$v->name}}</td>
                                 </tr>
                             @endforeach

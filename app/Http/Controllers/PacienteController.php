@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UpdatePropietario;
 use App\Models\Historial;
 use App\Models\Notification;
 use App\Models\Paciente;
@@ -12,6 +13,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 use Malahierba\ChileRut\ChileRut;
 use Malahierba\ChileRut\Rules\ValidChileanRut;
 
@@ -197,6 +199,7 @@ class PacienteController extends Controller
     public function show(Paciente $paciente)
     {
         $historial = Historial::join('users','historial.user_id','=','users.id')->where('historial.paciente_id',$paciente->id)
+        ->select('historial.*','users.name as veterinario')
         ->orderBy('fecha','desc')
         ->get();
 
@@ -208,4 +211,18 @@ class PacienteController extends Controller
 
         return view('pacientes.revisar',compact('paciente','historial','propietario','vacunas'));
     }
+
+    public function edit(Paciente $paciente ){
+        return view('pacientes.edit', compact('paciente'));
+    }
+
+    public function update(Request $request, Paciente $paciente){
+        $request->validate([
+            'chip' => ['required','numeric','digits:15','unique:pacientes'],
+        ]);
+
+        $paciente->update($request->all());
+        return redirect()->route('pacientes.show',$paciente->id);
+    }
+
 }
